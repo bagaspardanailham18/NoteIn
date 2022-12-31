@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_note">
+
+    <fragment
+        android:id="@+id/navigation_note"
+        android:name="com.bagaspardanailham.notein.ui.note.NoteFragment"
+        android:label="@string/title_note"
+        tools:layout="@layout/fragment_note" >
+        <action
+            android:id="@+id/action_navigation_note_to_addUpdateNoteActivity"
+            app:destination="@id/addUpdateNoteActivity" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_link"
+        android:name="com.bagaspardanailham.notein.ui.link.LinkFragment"
+        android:label="@string/title_link"
+        tools:layout="@layout/fragment_link" >
+        <action
+            android:id="@+id/action_navigation_link_to_addUpdateLinkActivity"
+            app:destination="@id/addUpdateLinkActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/addUpdateLinkActivity"
+        android:name="com.bagaspardanailham.notein.ui.add.AddUpdateLinkActivity"
+        android:label="activity_add_update_link"
+        tools:layout="@layout/activity_add_update_link" >
+        <argument
+            android:name="isEdit"
+            app:argType="boolean"
+            android:defaultValue="true" />
+    </activity>
+    <dialog
+        android:id="@+id/noteItemModalBottomSheet"
+        android:name="com.bagaspardanailham.notein.ui.note.NoteItemModalBottomSheet"
+        android:label="NoteItemModalBottomSheet" >
+        <action
+            android:id="@+id/action_noteItemModalBottomSheet_to_addUpdateNoteActivity"
+            app:destination="@id/addUpdateNoteActivity" />
+    </dialog>
+    <activity
+        android:id="@+id/addUpdateNoteActivity"
+        android:name="com.bagaspardanailham.notein.ui.add.AddUpdateNoteActivity"
+        android:label="activity_add_update_note"
+        tools:layout="@layout/activity_add_update_note" >
+        <argument
+            android:name="isEdit"
+            app:argType="boolean"
+            android:defaultValue="true" />
+    </activity>
+    <dialog
+        android:id="@+id/linkItemModalBottomSheet"
+        android:name="com.bagaspardanailham.notein.ui.link.LinkItemModalBottomSheet"
+        android:label="LinkItemModalBottomSheet" >
+        <action
+            android:id="@+id/action_linkItemModalBottomSheet_to_addUpdateLinkActivity"
+            app:destination="@id/addUpdateLinkActivity" />
+    </dialog>
+
+</navigation>

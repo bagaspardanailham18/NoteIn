@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="15dp"
+    android:layout_margin="6dp"
+    app:cardElevation="1dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/tv_item_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:maxHeight="100dp"
+            android:scaleType="centerCrop"
+            app:shapeAppearance="@style/circleImageView"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_note_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginHorizontal="5dp"
+            android:fontFamily="@font/poppinsmedium"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            tools:text="Note Title"
+            android:maxLines="2"
+            android:ellipsize="end" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_note_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            tools:text="@tools:sample/lorem/random"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppinslight" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_note_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="5dp"
+            android:fontFamily="@font/poppinslight"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            tools:text="16-08-2022" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
