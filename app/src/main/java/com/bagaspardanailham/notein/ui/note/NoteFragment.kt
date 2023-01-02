@@ -72,13 +72,11 @@ class NoteFragment : Fragment() {
 
     private fun setupRvNoteData() {
         binding.swipeToRefresh.isRefreshing = true
-        noteViewModel._isLoading.postValue(true)
 
         lifecycleScope.launch {
-            noteViewModel.getAllNotes().observe(viewLifecycleOwner) {
+            noteViewModel.note.collect {
                 if (it.isNotEmpty()) {
                     noteListAdapter.submitList(it)
-                    noteViewModel._isLoading.value = false
                     binding.apply {
                         swipeToRefresh.isRefreshing = false
                         imgNoData.visibility = View.GONE
@@ -87,7 +85,6 @@ class NoteFragment : Fragment() {
                         rvNotes.setHasFixedSize(true)
                     }
                 } else {
-                    noteViewModel._isLoading.value = false
                     binding.swipeToRefresh.isRefreshing = false
                     binding.imgNoData.visibility = View.VISIBLE
                 }
@@ -110,12 +107,11 @@ class NoteFragment : Fragment() {
 
             override fun onQueryTextChange(q: String?): Boolean {
                 if (q!!.isNotEmpty() || q != "") {
-                    noteViewModel._isLoading.postValue(true)
+                    noteViewModel.getNoteByQuery(q)
                     lifecycleScope.launch {
-                        noteViewModel.getNoteByQuery(q).observe(viewLifecycleOwner) {
+                        noteViewModel.searchedNotes.collect {
                             if (it.isNotEmpty()) {
                                 noteListAdapter.submitList(it)
-                                noteViewModel._isLoading.postValue(false)
                                 with(binding) {
                                     imgNoData.visibility = View.GONE
                                     rvNotes.visibility = View.GONE
@@ -125,7 +121,6 @@ class NoteFragment : Fragment() {
                                     rvSearchedNotes.setHasFixedSize(true)
                                 }
                             } else {
-                                noteViewModel._isLoading.postValue(false)
                                 binding.rvSearchedNotes.visibility = View.GONE
                                 binding.rvNotes.visibility = View.GONE
                                 binding.imgNoData.visibility = View.VISIBLE
@@ -153,12 +148,14 @@ class NoteFragment : Fragment() {
     }
 
     private fun setLoadingState() {
-        noteViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            binding.apply {
-                if (isLoading) {
-                    progressBar.visibility = View.VISIBLE
-                } else {
-                    progressBar.visibility = View.GONE
+        lifecycleScope.launch {
+            noteViewModel.isLoading.collect { isLoading ->
+                binding.apply {
+                    if (isLoading) {
+                        progressBar.visibility = View.VISIBLE
+                    } else {
+                        progressBar.visibility = View.GONE
+                    }
                 }
             }
         }

@@ -16,10 +16,10 @@ interface NoteInDao {
     suspend fun updateNote(note: NoteEntity)
 
     @Query("SELECT * FROM note")
-    fun getAllNote(): LiveData<List<NoteEntity>>
+    fun getAllNote(): List<NoteEntity>
 
     @Query("SELECT * FROM note WHERE title LIKE '%' || :q || '%'")
-    fun getNoteByQuery(q: String?): LiveData<List<NoteEntity>>
+    fun getNoteByQuery(q: String?): List<NoteEntity>
 
     @Delete
     suspend fun deleteNote(note: NoteEntity?)

@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/ralewaysemibold"
-            android:text="@string/add_note"
+            android:text="@string/detail"
             android:textColor="@color/black"
             android:textSize="22sp" />
 

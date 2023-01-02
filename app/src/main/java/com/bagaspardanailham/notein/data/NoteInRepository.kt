@@ -6,14 +6,16 @@ import com.bagaspardanailham.notein.data.local.NoteInDatabase
 import com.bagaspardanailham.notein.data.local.model.LinkEntity
 import com.bagaspardanailham.notein.data.local.model.NoteEntity
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class NoteInRepository @Inject constructor(private val noteInDatabase: NoteInDatabase) {
 
-    suspend fun insertNote(note: NoteEntity) {
+    suspend fun insertNote(note: NoteEntity): Flow<Unit> = flow {
         noteInDatabase.noteDao().insertNote(note)
+        emit(Unit)
     }
 
     suspend fun updateNote(note: NoteEntity) {
@@ -24,12 +26,12 @@ class NoteInRepository @Inject constructor(private val noteInDatabase: NoteInDat
         noteInDatabase.noteDao().deleteNote(note)
     }
 
-    fun getAllNotes(): LiveData<List<NoteEntity>> {
-        return noteInDatabase.noteDao().getAllNote()
+    fun getAllNotes(): Flow<List<NoteEntity>> = flow {
+        emit(noteInDatabase.noteDao().getAllNote())
     }
 
-    fun getNoteByQuery(q: String?): LiveData<List<NoteEntity>> {
-        return noteInDatabase.noteDao().getNoteByQuery(q)
+    fun getNoteByQuery(q: String?): Flow<List<NoteEntity>> = flow {
+        emit(noteInDatabase.noteDao().getNoteByQuery(q))
     }
 
     suspend fun insertLink(link: LinkEntity) {
